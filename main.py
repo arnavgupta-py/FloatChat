@@ -1,5 +1,3 @@
-# main.py
-
 import streamlit as st
 import time
 import pandas as pd
@@ -11,8 +9,6 @@ from query import (
 )
 from trend import get_hardcoded_data, run_time_series_analysis
 
-
-# --- Page Configuration (First command) ---
 st.set_page_config(
     page_title="FloatChat - The Thinking Ocean",
     page_icon="🌊",
@@ -20,10 +16,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-
-# --- PREMIUM OCEAN THEME WITH ADVANCED ANIMATIONS ---
-def apply_premium_theme():
-    """Injects premium CSS for an immersive ocean-themed UI with advanced animations."""
+def apply_theme():
     st.markdown("""
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@200;300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@300;400;600&display=swap');
@@ -51,7 +44,6 @@ def apply_premium_theme():
                 --font-mono: 'JetBrains Mono', monospace;
             }
             
-            /* Keyframe Animations */
             @keyframes waveMotion {
                 0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
                 25% { transform: translateX(-20px) translateY(-5px) rotate(-1deg); }
@@ -107,7 +99,6 @@ def apply_premium_theme():
                 100% { background-position: 0% 50%; }
             }
             
-            /* Animated Ocean Background */
             [data-testid="stAppViewContainer"] {
                 background: linear-gradient(180deg, 
                     var(--primary-deep) 0%,
@@ -136,7 +127,6 @@ def apply_premium_theme():
                 z-index: 1;
             }
             
-            /* Floating Bubble Particles */
             [data-testid="stAppViewContainer"]::after {
                 content: '';
                 position: fixed;
@@ -153,7 +143,6 @@ def apply_premium_theme():
                 z-index: 1;
             }
             
-            /* Sidebar Premium Styling */
             [data-testid="stSidebar"] > div:first-child {
                 background: linear-gradient(135deg, 
                     var(--surface-dark) 0%,
@@ -168,7 +157,6 @@ def apply_premium_theme():
                 position: relative;
             }
             
-            /* Animated Sidebar Title */
             .sidebar-title {
                 font-family: var(--font-display);
                 font-size: 1.8rem;
@@ -187,7 +175,6 @@ def apply_premium_theme():
                 margin-bottom: 1.5rem;
             }
             
-            /* Premium Metric Cards */
             .metric-card {
                 background: linear-gradient(135deg, 
                     var(--surface-glass) 0%, 
@@ -249,7 +236,6 @@ def apply_premium_theme():
                 margin-top: 0.5rem;
             }
             
-            /* Chat Title Animation */
             .floatchat-title {
                 font-family: var(--font-display);
                 font-size: 5rem;
@@ -283,7 +269,6 @@ def apply_premium_theme():
                 letter-spacing: 3px;
             }
             
-            /* Premium Chat Messages */
             [data-testid="stChatMessage"] {
                 background: linear-gradient(135deg, 
                     var(--surface-glass) 0%,
@@ -325,7 +310,6 @@ def apply_premium_theme():
                 animation: shimmer 3s ease-in-out infinite;
             }
             
-            /* Enhanced Buttons */
             .stButton > button {
                 background: linear-gradient(135deg, 
                     var(--ocean-mid) 0%, 
@@ -372,7 +356,6 @@ def apply_premium_theme():
                     var(--accent-aqua) 100%);
             }
             
-            /* Chat Input Premium Styling */
             [data-testid="stChatInput"] > div {
                 background: linear-gradient(135deg, 
                     var(--surface-glass) 0%,
@@ -386,7 +369,6 @@ def apply_premium_theme():
                 animation: pulseGlow 4s ease-in-out infinite;
             }
             
-            /* Expander Styling */
             .streamlit-expanderHeader {
                 background: linear-gradient(90deg, 
                     var(--surface-glass) 0%, 
@@ -404,7 +386,6 @@ def apply_premium_theme():
                 box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
             }
             
-            /* Tabs Premium Styling */
             .stTabs [data-baseweb="tab-list"] {
                 background: linear-gradient(90deg, 
                     var(--surface-glass) 0%,
@@ -438,7 +419,6 @@ def apply_premium_theme():
                 box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
             }
             
-            /* DataFrame Styling */
             .stDataFrame {
                 border-radius: 16px;
                 overflow: hidden;
@@ -446,7 +426,6 @@ def apply_premium_theme():
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             }
             
-            /* Scrollbar Styling */
             ::-webkit-scrollbar {
                 width: 12px;
                 height: 12px;
@@ -471,12 +450,10 @@ def apply_premium_theme():
                     var(--ocean-light) 100%);
             }
             
-            /* Loading Spinner Enhancement */
             .stSpinner > div {
                 border-color: var(--accent-cyan) transparent transparent transparent;
             }
             
-            /* Timestamp Label */
             .timestamp-label {
                 font-family: var(--font-mono);
                 font-size: 0.75rem;
@@ -491,7 +468,6 @@ def apply_premium_theme():
                 opacity: 0;
             }
             
-            /* Wave Animation Overlay */
             .wave-overlay {
                 position: fixed;
                 bottom: 0;
@@ -506,7 +482,6 @@ def apply_premium_theme():
                 animation: waveMotion 8s ease-in-out infinite;
             }
             
-            /* Plotly Chart Container Enhancement */
             .js-plotly-plot {
                 border-radius: 16px;
                 overflow: hidden;
@@ -515,7 +490,6 @@ def apply_premium_theme():
                 animation: slideInFromOcean 0.8s ease-out forwards;
             }
             
-            /* Info Box Styling */
             .stInfo {
                 background: linear-gradient(135deg, 
                     rgba(78, 205, 196, 0.1) 0%,
@@ -526,7 +500,6 @@ def apply_premium_theme():
                 animation: slideInFromOcean 0.6s ease-out forwards;
             }
             
-            /* Success/Warning/Error Messages */
             .stSuccess, .stWarning, .stError {
                 border-radius: 16px;
                 backdrop-filter: blur(10px);
@@ -536,11 +509,8 @@ def apply_premium_theme():
         <div class="wave-overlay"></div>
     """, unsafe_allow_html=True)
 
-
-# Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
-
 
 def handle_chat_prompt(prompt):
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -557,7 +527,7 @@ def handle_chat_prompt(prompt):
     response_obj = HARDCODED_RESPONSES.get(prompt)
 
     with st.spinner("🌊 Diving into the ocean depths of data..."):
-        time.sleep(1.5)  # Slightly longer for dramatic effect
+        time.sleep(1.5) 
         
         if response_obj:
             response_type = response_obj["type"]
@@ -577,10 +547,8 @@ def handle_chat_prompt(prompt):
     st.session_state.messages.append(assistant_message)
 
 
-# --- Main App Execution ---
-apply_premium_theme()
+apply_theme()
 
-# Animated Header
 st.markdown(
     '''<div style="text-align: center; margin-bottom: 3rem;">
         <h1 class="floatchat-title">FloatChat</h1>
@@ -589,11 +557,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Sidebar with Premium Elements
 with st.sidebar:
     st.markdown('<h3 class="sidebar-title">Ocean Pulse</h3>', unsafe_allow_html=True)
-    
-    # Animated Metric Cards
+
     st.markdown(
         '''<div class="metric-card">
             <div class="metric-card-value">3,847</div>
@@ -627,14 +593,9 @@ with st.sidebar:
     
     st.markdown('<h3 class="sidebar-title">Command Bridge</h3>', unsafe_allow_html=True)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("🔄 Clear", help="Reset conversation", use_container_width=True):
-            st.session_state.messages = []
-            st.rerun()
-    with col2:
-        if st.button("📊 Export", help="Export chat data", use_container_width=True):
-            st.info("Export feature coming soon!")
+    if st.button("🔄 Clear", help="Reset conversation", use_container_width=True):
+        st.session_state.messages = []
+        st.rerun()
     
     st.divider()
     
@@ -653,9 +614,7 @@ with st.sidebar:
             use_container_width=True
         )
 
-
-# Main Content Tabs
-tab1, tab2, tab3 = st.tabs(["🤖 **Ocean Assistant**", "📈 **Trend Analysis**", "🗺️ **Global View**"])
+tab1, tab2 = st.tabs(["**Ocean Assistant**", "**Trend Analysis**"])
 
 with tab1:
     if "selected_question" in st.session_state:
@@ -749,16 +708,3 @@ with tab2:
                 st.caption("ML-powered predictions using Prophet")
                 st.plotly_chart(forecast_fig, use_container_width=True)
 
-with tab3:
-    st.markdown("### 🌍 Global Ocean Monitoring")
-    
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("🌡️ Global SST Anomaly", "+0.3°C", "↑ 0.1°C from last month")
-    with col2:
-        st.metric("🧊 Arctic Ice Coverage", "4.2M km²", "↓ 5% year-over-year")
-    with col3:
-        st.metric("🌪️ Active Cyclones", "2", "Pacific & Atlantic")
-    
-    st.markdown("---")
-    st.info("🗺️ Interactive global ocean visualization coming soon! Track float trajectories, temperature anomalies, and current patterns in real-time.")
